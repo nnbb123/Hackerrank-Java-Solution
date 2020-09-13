@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.math.BigInteger;
+
+public class Solution {
+
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        Scanner scan = new Scanner(System.in);
+        String s = scan.nextLine();
+        scan.close();
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        try{
+            md.update(s.getBytes());
+            byte[] digest = md.digest();
+            //String myhash = javax.xml.bind.DatatypeConverter.printHexBinary(digest).toLowerCase();
+            //System.out.println(myhash);
+            
+            // for (byte b : digest) {
+            //     System.out.printf("%2x", b);
+            // }
+
+            BigInteger no = new BigInteger(1, digest);
+            String myhash = no.toString(16);
+            while(myhash.length() < 32) {
+                myhash = "0" + myhash;
+            }    
+            System.out.println(myhash);
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+}
