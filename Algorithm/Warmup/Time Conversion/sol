@@ -1,0 +1,40 @@
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
+public class Solution {
+
+    /*
+     * Complete the timeConversion function below.
+     */
+    static String timeConversion(String s) {
+        // String sub = s.substring(8);
+        // int hh = Integer.parseInt(s.substring(0, 2));
+        // return sub.equalsIgnoreCase("am")? 
+        //     (hh<10? "0":"") + (hh >= 12? "0"+(hh - 12) : hh) + s.substring(2, 8) : 
+        //     (hh < 12? hh + 12 : (hh < 10)? "0" + hh : hh)  + s.substring(2, 8);  
+        
+        DateTimeFormatter ft = DateTimeFormatter.ofPattern("hh:mm:ssa");
+        LocalTime d = LocalTime.parse(s, ft);
+        return d.format(DateTimeFormatter.ISO_LOCAL_TIME) ;
+    }
+    
+
+    private static final Scanner scan = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scan.nextLine();
+
+        String result = timeConversion(s);
+
+        bw.write(result);
+        bw.newLine();
+
+        bw.close();
+    }
+}
